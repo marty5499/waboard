@@ -1,24 +1,25 @@
-import machine, neopixel,time,random
+from webbit import WebBit
+import time
+wbit = WebBit()
 
-strong = 7
-n = 25
-p = 4
-np = neopixel.NeoPixel(machine.Pin(p), n)
+DO = [262, 100]
+RE = [294, 100]
+ME = [330, 100]
 
-def clear():    
-    for led in range(25):
-        np[led] = (0,0,0)
-    np.write()
+wbit.play(DO)
+wbit.play(RE)
+wbit.play(ME)
 
-def show():
-    while True:
-        led = random.randint(0,24)
-        r = random.randint(0,strong)
-        g = random.randint(0,strong)
-        b = random.randint(0,strong)
-        np[led] = (r,g,b)
-        np.write()
-        time.sleep(0.001)
-show()
-clear()
-print('ok')
+while True:
+    time.sleep(0.01)
+    if wbit.btnA():
+        wbit.play(DO)
+        wbit.showAll(0, 255, 0)
+
+    if wbit.btnB():
+        wbit.play(RE)
+        wbit.showAll(255, 0, 0)
+
+    if wbit.btnA() and wbit.btnB():
+        wbit.play(ME)
+        wbit.showAll(0, 0, 255)
