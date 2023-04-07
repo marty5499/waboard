@@ -21,11 +21,10 @@
 
         upload.addEventListener('click', async () => {
             upload.disabled = true;
-            var file = 'main.py';
             await repl.usbConnect();
             msg.innerHTML = 'uploading...';
             var writeLen = await repl.uploadFile(ctx.value);
-            msg.innerHTML = 'upload ' + file + " ," + writeLen + " Bytes";
+            msg.innerHTML = 'upload main.py ,' + writeLen + " Bytes";
             upload.disabled = false;
         })
     </script>
